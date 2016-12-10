@@ -25,7 +25,7 @@ RUN yum install -y \
     cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     mkdir build ; \
     cd build ; \
-    cmake .. ; \
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$DEST/$VERSION .. ; \
     make ; \
     make install ; \
     cd ../../ ;  \
