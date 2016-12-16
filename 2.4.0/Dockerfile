@@ -14,6 +14,7 @@ ENV GIT=https://github.com/pezmaster31/bamtools.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/bin:$PATH
 ENV LD_LIBRARY_PATH=$DEST/$VERSION/lib/bamtools:$LD_LIBRARY_PATH
+ENV CPATH=$DEST/$VERSION/include/bamtools:$CPATH
 
 RUN yum install -y \
        cmake \
