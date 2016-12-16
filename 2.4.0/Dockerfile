@@ -15,7 +15,7 @@ ENV DEST=/software/applications/$APP_NAME
 ENV PATH=$DEST/$VERSION/bin:$PATH
 ENV LD_LIBRARY_PATH=$DEST/$VERSION/lib/bamtools:$LD_LIBRARY_PATH
 ENV CPATH=$DEST/$VERSION/include/bamtools:$CPATH
-ENV CPATH=$DEST/$VERSION/lib/bamtools:$LPATH
+ENV LPATH=$DEST/$VERSION/lib/bamtools:$LPATH
 
 RUN yum install -y \
        cmake \
