@@ -20,6 +20,7 @@ ENV LPATH=$DEST/$VERSION/lib/bamtools:$LPATH
 RUN yum install -y \
        cmake \
        zlib-devel ; \
+    yum clean all ; \
     git clone $GIT ; \
     cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
