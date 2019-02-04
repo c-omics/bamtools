@@ -1,4 +1,4 @@
-FROM comics/centos:latest
+FROM comics/centos
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 
 ##############################################################
@@ -18,26 +18,26 @@ ENV CPATH=$DEST/$VERSION/include/bamtools:$CPATH
 ENV LPATH=$DEST/$VERSION/lib/bamtools:$LPATH
 
 RUN yum install -y \
-       zlib-devel ; \
-    yum clean all ; \
+       zlib-devel && \
+    yum clean all && \
     rm -rf /var/cache/yum ; 
-RUN curl -LO https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz ; \
-    tar xzf cmake-3.12.0.tar.gz ; \
-    cd cmake-3.12.0 ; \
-    ./bootstrap ; \
-    make ; \
-    make install ;
-RUN git clone $GIT ; \
-    cd $APP_NAME ; \
-    git checkout tags/$VERSION ; \
-    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
-    cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
-    mkdir build ; \
-    cd build ; \
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=$DEST/$VERSION .. ; \
-    make ; \
-    make install ; \
-    cd ../../ ;  \
+RUN curl -L https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz | tar xzf - && \
+    cd cmake-3.12.0 && \
+    ./bootstrap && \
+    make && \
+    make install && \
+    cd .. && rm -rf cmake*
+RUN git clone $GIT && \
+    cd $APP_NAME && \
+    git checkout tags/$VERSION && \
+    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION && \
+    cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$DEST/$VERSION .. && \
+    make && \
+    make install && \
+    cd ../.. &&  \
     rm -rf $APP_NAME
 CMD ["/bin/bash"]
 
