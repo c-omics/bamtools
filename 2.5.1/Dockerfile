@@ -18,15 +18,10 @@ ENV CPATH=$DEST/$VERSION/include/bamtools:$CPATH
 ENV LPATH=$DEST/$VERSION/lib/bamtools:$LPATH
 
 RUN yum install -y \
+       cmake3 \
        zlib-devel && \
     yum clean all && \
     rm -rf /var/cache/yum ; 
-RUN curl -L https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz | tar xzf - && \
-    cd cmake-3.12.0 && \
-    ./bootstrap && \
-    make && \
-    make install && \
-    cd .. && rm -rf cmake*
 RUN git clone $GIT && \
     cd $APP_NAME && \
     git checkout tags/$VERSION && \
@@ -34,7 +29,7 @@ RUN git clone $GIT && \
     cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ && \
     mkdir build && \
     cd build && \
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=$DEST/$VERSION .. && \
+    cmake3 -DCMAKE_INSTALL_PREFIX:PATH=$DEST/$VERSION .. && \
     make && \
     make install && \
     cd ../.. &&  \
