@@ -13,9 +13,9 @@ ENV VERSION=v2.5.1
 ENV GIT=https://github.com/pezmaster31/bamtools.git
 ENV DEST=/software/applications/$APP_NAME
 ENV PATH=$DEST/$VERSION/bin:$PATH
-ENV LD_LIBRARY_PATH=$DEST/$VERSION/lib/bamtools:$LD_LIBRARY_PATH
 ENV CPATH=$DEST/$VERSION/include/bamtools:$CPATH
-ENV LPATH=$DEST/$VERSION/lib/bamtools:$LPATH
+ENV LPATH=$DEST/$VERSION/lib64:$LPATH
+ENV LIBRARY_PATH=$DEST/$VERSION/lib64:$LIBRARY_PATH
 
 RUN yum install -y \
        cmake3 \
